@@ -11,7 +11,7 @@ Insta: moh.amin.m78
 Telegram: @amin_m_7892
 <br>
 
-<img src="http://s4.picofile.com/file/8362972342/Screenshot_137_.png"></>
+<img src="http://s4.picofile.com/file/8362972342/Screenshot_137_.png">
 
 این سورس کد پارالاکس اسکرول ویو برای بیسیک4اندروید است
 
