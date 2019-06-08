@@ -1,0 +1,86 @@
+﻿Build1=Default,amin_mohamadi.ir.parallax
+File1=1.jpg
+FileGroup1=Default Group
+Group=Default Group
+IconFile=
+Library1=core
+Library2=javaobject
+Library3=xmllayoutbuilder
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="26"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.DarkTheme)~\n~'End of default text.~\n~
+Module1=Starter
+Module2=ParallaxScrollView
+NumberOfFiles=1
+NumberOfLibraries=3
+NumberOfModules=2
+Version=9
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: ParallaxScrollViewB4A
+	#VersionCode: 1
+	#VersionName: 1.0
+	#SupportedOrientations: portrait
+	#CanInstallToExternalStorage: False
+
+'	ریسورس های مورد نیاز
+	#AdditionalRes: ../resParallax
+	#AdditionalJar: parallaxscroll-1.0-sources.jar
+	#AdditionalJar: parallaxscroll-1.0.aar
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: False
+#End Region
+
+Sub Process_Globals
+End Sub
+
+Sub Globals
+	Private XML As XmlLayoutBuilder
+	Private HeadPanel As Panel
+	Private FootPanel As Panel
+End Sub
+
+'محمدامین محمدی
+'amin-mohamadi.ir
+'Telegram: @amin_m_7892
+
+Sub Activity_Create(FirstTime As Boolean)
+	
+'	اینجا پارالاکس اسکرول ویو رو به اکتیویتی اضافه کردم شما میتونید به هر پنل دیگه ای اضافه کنید
+	XML.LoadXmlLayout(Activity,"parallaxscroll")
+	
+	'این پنل بالایی پارالاکس اسکرول ویو است و هرچیزی درآن قابل افزودن است!
+'	در این مثال من یک تصویر رو به پنل اضافه کردم شما هرچی بخواید میتونید اضافه کنید
+	HeadPanel = XML.GetView("head")
+	HeadPanel.SetBackgroundImage(LoadBitmap(File.DirAssets,"1.jpg"))
+	HeadPanel.Height = 30%y
+
+
+'	و این پنل پایینی پارالاکس
+'	مشابه پنل بالایی قابل انجام هر کاری هست	
+	FootPanel = XML.GetView("foot")
+	FootPanel.Height = 100%y
+	FootPanel.Color = Colors.Cyan
+
+
+	'برای لیستنر اسکرول ویو
+	Dim j As JavaObject = XML.GetView("parall")
+	Dim e As Object = j.CreateEvent("android.view.View.OnScrollChangeListener","OnScrollChanged",Null)
+	j.RunMethod("setOnScrollChangeListener",Array(e))
+End Sub
+
+private Sub OnScrollChanged_Event (MethodName As String, Args() As Object) As Object
+	Dim Position As Int = Args(2)
+
+'	ارتفاع اسکرول ویو رو در متغیر بالا میتونید بگیرید
+	Log("Position="&Position)
+
+	Return True
+End Sub
+
+Sub Activity_Resume
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+End Sub
