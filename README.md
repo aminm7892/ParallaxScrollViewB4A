@@ -1,6 +1,8 @@
 # ParallaxScrollViewB4A
 
-
+<br>
+MohammadAmin Mohammadi
+<br>
 http://amin-mohamadi.ir
 <br>
 Insta: moh.amin.m78
