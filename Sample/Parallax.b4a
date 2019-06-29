@@ -8,10 +8,9 @@ Library2=javaobject
 Library3=xmllayoutbuilder
 ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="26"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.DarkTheme)~\n~'End of default text.~\n~
 Module1=Starter
-Module2=ParallaxScrollView
 NumberOfFiles=1
 NumberOfLibraries=3
-NumberOfModules=2
+NumberOfModules=1
 Version=9
 @EndOfDesignText@
 #Region  Project Attributes 
@@ -65,15 +64,17 @@ Sub Activity_Create(FirstTime As Boolean)
 
 
 	'برای لیستنر اسکرول ویو
-	Dim j As JavaObject = XML.GetView("parall")
-	Dim e As Object = j.CreateEvent("android.view.View.OnScrollChangeListener","OnScrollChanged",Null)
-	j.RunMethod("setOnScrollChangeListener",Array(e))
+	Dim Parallax As JavaObject = XML.GetView("parall")
+	Dim Listener As Object = Parallax.CreateEvent("android.view.ViewTreeObserver.OnScrollChangedListener","OnScrollChanged",0)
+	Parallax.RunMethodJO("getViewTreeObserver",Array As Object()).RunMethod("addOnScrollChangedListener",Array(Listener))
 End Sub
 
 private Sub OnScrollChanged_Event (MethodName As String, Args() As Object) As Object
-	Dim Position As Int = Args(2)
 
-'	ارتفاع اسکرول ویو رو در متغیر بالا میتونید بگیرید
+	Dim Parallax As JavaObject = XML.GetView("parall")
+	Dim Position As Int = Parallax.RunMethod("getScrollY",Array())
+	
+'	ارتفاع اسکرول ویو رو در متغیر زیر میتونید بگیرید
 	Log("Position="&Position)
 
 	Return True
